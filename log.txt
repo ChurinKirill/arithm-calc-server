@@ -1,0 +1,6 @@
+2024/12/22 20:04:38 starting server...
+2024/12/22 20:04:44 main_calc.go: given expression = (2+2)*32
+2024/12/22 20:04:44 request completed, the answer is 128.000000
+2024/12/22 20:04:57 main_calc.go: given expression = (2+2)*
+2024/12/22 20:04:57 createNode: incorrect input format
+2024/12/22 20:05:10 shutting down server...
