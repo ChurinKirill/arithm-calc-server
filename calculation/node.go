@@ -1,4 +1,4 @@
-package main
+package calculation
 
 type iNode interface {
 	calculate() float64

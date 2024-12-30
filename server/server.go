@@ -1,6 +1,8 @@
-package main
+package server
 
 import (
+	calculator "arithm-calc-server/calculation"
+	logger "arithm-calc-server/logger"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -18,14 +20,14 @@ type Error struct {
 func MainHandler(w http.ResponseWriter, r *http.Request) {
 	expression := r.URL.Query().Get("expression")
 	if expression == "shutdown" {
-		ShutdownLogger()
+		logger.ShutdownLogger()
 		os.Exit(0)
 	}
-	result, err := Calc(expression)
-	if err.Type != Ok {
+	result, err := calculator.Calc(expression)
+	if err.Type != calculator.Ok {
 		panic(err)
 	}
-	Log(fmt.Sprintf("request completed, the answer is %f", result))
+	logger.Log(fmt.Sprintf("request completed, the answer is %f", result))
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(Response{
 		Body: result})
@@ -35,21 +37,21 @@ func PanicMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if err := recover(); err != nil {
-				myerr := err.(CustomPanic)
+				myerr := err.(calculator.CustomPanic)
 				var (
 					status int
 					msg    string
 				)
 
-				if myerr.Type == InvalidExpression {
+				if myerr.Type == calculator.InvalidExpression {
 					status = http.StatusUnprocessableEntity
 					msg = "Expression is not valid"
-				} else if myerr.Type == InnerExpression {
+				} else if myerr.Type == calculator.InnerExpression {
 					status = http.StatusInternalServerError
 					msg = "Internal server error"
 				}
 				w.WriteHeader(status)
-				Log(myerr.Text.Error())
+				logger.Log(myerr.Text.Error())
 				// json.NewEncoder(w).Encode(Error{
 				// 	Body: myerr.Text.Error()})
 				json.NewEncoder(w).Encode(Error{
@@ -65,6 +67,6 @@ func PanicMiddleware(next http.HandlerFunc) http.HandlerFunc {
 
 func StartServer() {
 	http.HandleFunc("/apl/v1/calculate", PanicMiddleware(MainHandler))
-	Log("starting server...")
+	logger.Log("starting server...")
 	http.ListenAndServe(":8080", nil)
 }

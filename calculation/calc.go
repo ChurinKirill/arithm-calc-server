@@ -1,6 +1,7 @@
-package main
+package calculation
 
 import (
+	logger "arithm-calc-server/logger"
 	"fmt"
 )
 
@@ -116,7 +117,7 @@ func createNode(tokens []iToken) (iNode, CustomPanic) {
 }
 
 func Calc(expression string) (float64, CustomPanic) {
-	Log(fmt.Sprintf("main_calc.go: given expression = %s", expression))
+	logger.Log(fmt.Sprintf("main_calc.go: given expression = %s", expression))
 	tokens, errt := Tokenize(expression)
 	if errt.Type != Ok {
 		return 0, errt

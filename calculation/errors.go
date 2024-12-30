@@ -1,4 +1,4 @@
-package main
+package calculation
 
 var (
 	InvalidExpression = 1

@@ -1,4 +1,4 @@
-package main
+package calculation
 
 const (
 	numT int = 0
