@@ -127,5 +127,9 @@ func Calc(expression string) (float64, CustomPanic) {
 	if errn.Type != Ok {
 		return 0, errn
 	}
-	return rootNode.calculate(), CustomPanic{Type: Ok, Text: nil}
+	res, err := rootNode.calculate()
+	if err != nil {
+		return 0, CustomPanic{Type: InnerExpression, Text: err}
+	}
+	return res, CustomPanic{Type: Ok, Text: nil}
 }

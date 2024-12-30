@@ -1,7 +1,11 @@
 package calculation
 
+import (
+	"fmt"
+)
+
 type iNode interface {
-	calculate() float64
+	calculate() (float64, error)
 }
 
 type node struct {
@@ -18,22 +22,32 @@ type nodeBrackets struct {
 	innerExp iNode
 }
 
-func (nc nodeConst) calculate() float64 {
-	return nc.constVal
+func (nc nodeConst) calculate() (float64, error) {
+	return nc.constVal, nil
 }
 
-func (n nodeBrackets) calculate() float64 {
+func (n nodeBrackets) calculate() (float64, error) {
 	return n.innerExp.calculate()
 }
 
-func (n node) calculate() float64 {
+func (n node) calculate() (float64, error) {
+	l, errl := n.left.calculate()
+	r, errr := n.right.calculate()
+	if errl != nil {
+		return 0, errl
+	} else if errr != nil {
+		return 0, errr
+	}
 	switch n.operation {
 	case '+':
-		return n.left.calculate() + n.right.calculate()
+		return l + r, nil
 	case '-':
-		return n.left.calculate() - n.right.calculate()
+		return l - r, nil
 	case '*':
-		return n.left.calculate() * n.right.calculate()
+		return l * r, nil
 	}
-	return n.left.calculate() / n.right.calculate()
+	if r == 0 {
+		return 0, fmt.Errorf("Division by zero")
+	}
+	return l / r, nil
 }

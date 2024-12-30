@@ -1,0 +1,27 @@
+2024/12/30 16:21:23 starting server...
+2024/12/30 16:21:47 main_calc.go: given expression = 2+2
+2024/12/30 16:21:47 request completed, the answer is 4.000000
+2024/12/30 16:21:56 main_calc.go: given expression = 2+df
+2024/12/30 16:21:56 createNode: incorrect input format
+2024/12/30 16:22:48 main_calc.go: given expression = 2+2
+2024/12/30 16:22:48 request completed, the answer is 4.000000
+2024/12/30 16:23:02 main_calc.go: given expression = 2+gh
+2024/12/30 16:23:02 createNode: incorrect input format
+2024/12/30 16:23:11 main_calc.go: given expression = 2+2))
+2024/12/30 16:23:11 createNode: incorrect input format
+2024/12/30 16:24:09 main_calc.go: given expression = 2/0
+2024/12/30 16:24:09 request completed, the answer is +Inf
+2024/12/30 16:24:47 main_calc.go: given expression = 2/0
+2024/12/30 16:34:00 starting server...
+2024/12/30 16:34:16 main_calc.go: given expression = 2/0
+2024/12/30 16:34:16 Division by zero
+2024/12/30 16:34:27 main_calc.go: given expression = 2/2
+2024/12/30 16:34:35 request completed, the answer is 1.000000
+2024/12/30 16:34:48 main_calc.go: given expression = 2/2(
+2024/12/30 16:34:48 Division by zero
+2024/12/30 16:35:11 main_calc.go: given expression = 2/2(
+2024/12/30 16:35:28 Division by zero
+2024/12/30 16:35:40 main_calc.go: given expression = 2/2(
+2024/12/30 16:36:00 Division by zero
+2024/12/30 16:36:22 main_calc.go: given expression = 2/2)
+2024/12/30 16:36:22 createNode: incorrect input format

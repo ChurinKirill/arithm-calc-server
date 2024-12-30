@@ -66,7 +66,7 @@ func PanicMiddleware(next http.HandlerFunc) http.HandlerFunc {
 }
 
 func StartServer() {
-	http.HandleFunc("/apl/v1/calculate", PanicMiddleware(MainHandler))
+	http.HandleFunc("/api/v1/calculate", PanicMiddleware(MainHandler))
 	logger.Log("starting server...")
 	http.ListenAndServe(":8080", nil)
 }

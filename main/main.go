@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	err := logger.InitializeLogger("log.txt")
+	err := logger.InitializeLogger("../log.txt")
 	if err != nil {
 		return
 	}
